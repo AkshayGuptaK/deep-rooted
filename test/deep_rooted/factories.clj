@@ -12,3 +12,9 @@
 
 (defn ledger [orders]
   (reduce ledger-fns/add-order! {} orders))
+
+(defn trade [demand-id supply-id price quantity]
+  {:demand-id demand-id
+   :supply-id supply-id
+   :price price
+   :quantity quantity})
