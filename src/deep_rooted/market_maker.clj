@@ -51,3 +51,14 @@
           (recur new-requirement (matching-order ledger-map order) trades)
           {:ledger-map ledger-map
            :trades trades})))))
+
+(defn process-orders [orders]
+  (loop [ledger-map {}
+         acc-trades []
+         order (first orders)
+         orders (rest orders)]
+    (if (nil? order)
+      acc-trades
+      (let [{:keys [ledger-map trades]} (process-order-and-determine-trades! ledger-map order)
+            acc-trades (concat acc-trades trades)]
+        (recur ledger-map acc-trades (first orders) (rest orders))))))

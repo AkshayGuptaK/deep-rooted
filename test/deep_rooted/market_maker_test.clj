@@ -114,3 +114,20 @@
       (is (nil? added-demand-order))
       (is (= trades [(trade 1 1 supply-price1 supply-qty1)
                      (trade 1 2 supply-price2 supply-qty2)])))))
+
+(deftest process-orders-test
+  (testing "It should return no trades if no orders are given"
+    (is (= (sut/process-orders []) [])))
+ 
+  (testing "It should return correct trades for a series of orders"
+    (let [orders [(order 1 "tomato" :supply 24 100 "09:45")
+                  (order 2 "tomato" :supply 20 90 "09:46")
+                  (order 1 "tomato" :demand 22 110 "09:47")
+                  (order 2 "tomato" :demand 21 10 "09:48")
+                  (order 3 "tomato" :demand 21 40 "09:49")
+                  (order 3 "tomato" :supply 19 50 "09:50")]
+          trades [(trade 1 2 20 90)
+                  (trade 1 3 19 20)
+                  (trade 2 3 19 10)
+                  (trade 3 3 19 20)]]
+      (is (= (sut/process-orders orders) trades)))))
