@@ -1,7 +1,19 @@
 (ns deep-rooted.core
-  (:gen-class))
+  (:gen-class)
+  (:require [deep-rooted.parser :as parser]
+            [deep-rooted.market-maker :as market-maker]))
+
+(defn- trade-str [{:keys [demand-id supply-id price quantity]}]
+  "Formats a trade map into a string fit for printing"
+  (->> ["d" demand-id " s" supply-id " " price "/kg " quantity "kg"]
+       (apply str)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (->> *in*
+       (slurp)
+       (parser/parse-input)
+       (sort-by :time)
+       (market-maker/process-orders)
+       (map trade-str)
+       (run! println)))
