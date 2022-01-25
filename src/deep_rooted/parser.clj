@@ -39,3 +39,8 @@
      :quantity qty
      :time time}))
 
+(defn parse-input [input]
+  (->> input
+       str/split-lines
+       (map parse-input-line)))
+

@@ -39,3 +39,12 @@
       (is (thrown? java.lang.NumberFormatException
                    (sut/parse-input-line input-line))))))
 
+(deftest parse-input-test
+  (testing "It should return a list of orders for a correct multiline input"
+    (let [input (str "d1 09:48 tomato 110/kg 10kg\n"
+                     "s1 09:45 potato 10/kg 1kg\n"
+                     "s2 19:45 potato 110/kg 7kg")
+          orders [(order 1 "tomato" :demand 110 10 "09:48")
+                  (order 1 "potato" :supply 10 1 "09:45")
+                  (order 2 "potato" :supply 110 7 "19:45")]]
+      (is (= (sut/parse-input input) orders)))))
