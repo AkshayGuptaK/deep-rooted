@@ -1,0 +1,6 @@
+s1 09:45 tomato 24/kg 100kg
+s2 09:46 tomato 20/kg 90kg
+d1 09:47 tomato 22/kg 110kg
+d2 09:48 tomato 21/kg 10kg
+d3 09:49 tomato 21/kg 40kg
+s3 09:50 tomato 19/kg 50kg

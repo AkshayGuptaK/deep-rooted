@@ -1,5 +1,13 @@
 # deep-rooted
 
+## Example Usage
+
+With Leiningen
+`lein run < test-input.txt`
+
+With Java
+`java -jar target/uberjar/deep-rooted-0.1.0-SNAPSHOT-standalone.jar < test-input.txt`
+
 ## Data Structures
 
 The data structure underpinning this program is implemented in the `Ledger` module. Prioritisation is done using a `Java PriorityQueue` which is internally backed by a heap, allowing for logarithmic time insertion.
